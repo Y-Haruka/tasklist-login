@@ -13,6 +13,11 @@
         </tr>
         
         <tr>
+            <th>タイトル</th>
+            <td>{{ $message->title }}</td>
+        </tr>
+        
+        <tr>
             <th>タスク</th>
             <td>{{ $task->content }}</td>
         </tr>
