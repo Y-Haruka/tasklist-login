@@ -42,19 +42,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    /**
-     * このユーザが所有する投稿。（ Tasklistモデルとの関係を定義）
-     */
-    public function tasklists()
-    {
-        return $this->hasMany(Tasklist::class);
-    }
+    // /**
+    //  * このユーザが所有する投稿。（ Tasklistモデルとの関係を定義）
+    //  */
+    // public function tasklists()
+    // {
+    //     return $this->hasMany(Tasklist::class);
+    // }
     
-    /**
-     * このユーザに関係するモデルの件数をロードする。
-     */
-    public function loadRelationshipCounts()
-    {
-        $this->loadCount('tasklists');
-    }
+    // /**
+    //  * このユーザに関係するモデルの件数をロードする。
+    //  */
+    // public function loadRelationshipCounts()
+    // {
+    //     $this->loadCount('tasklists');
+    // }
 }
