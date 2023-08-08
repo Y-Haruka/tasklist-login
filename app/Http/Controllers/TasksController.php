@@ -16,10 +16,10 @@ class TasksController extends Controller
     // getでmessages/にアクセスされた場合の「一覧表示処理」
     public function index()
     {
-        // タスク一覧を取得
+        //タスク一覧を取得
         $tasks = Task::all();
-
-        // メッセージ一覧ビューでそれを表示
+        
+        //タスク一覧ビューでそれを表示
         return view('tasks.index', [
             'tasks' => $tasks,
         ]);
@@ -34,7 +34,7 @@ class TasksController extends Controller
     {
         $task = new Task;
         
-        // タスク作成ビューを表示
+        //タスク作成ビューを表示
         return view('tasks.create', [
             'task' => $task,
         ]);
@@ -51,13 +51,13 @@ class TasksController extends Controller
     {
         // バリデーション
         $request->validate([
-            'title' => 'required|max:255',
+            'status' => 'required|max:255',
             'content' => 'required|max:255',
         ]);
         
         // タスクを作成
         $task = new Task;
-        $message->title = $request->title;
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
         
@@ -74,10 +74,10 @@ class TasksController extends Controller
     // getでtasks/idにアクセスされた場合の「取得表示処理」
     public function show($id)
     {
-        // idの値でタスクを検索して取得
+        //idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
         
-        // タスク詳細ビューでそれを表示
+        //タスク詳細ビューでそれを表示
         return view('tasks.show', [
             'task' => $task,
         ]);
@@ -92,10 +92,10 @@ class TasksController extends Controller
     // getでtasks/id/editにアクセスされた場合の「更新画面表示処理」
     public function edit($id)
     {
-        // idの値でタスクを検索して取得
+        //idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
         
-        // タスク編集ビューでそれを表示
+        //タスク編集ビューでそれを表示
         return view('tasks.edit', [
             'task' => $task,
         ]);
@@ -113,14 +113,14 @@ class TasksController extends Controller
     {
         // バリデーション
         $request->validate([
-            'title' => 'required|max:255',
+            'status' => 'required|max:255',
             'content' => 'required|max:255',
         ]);
         
         // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
         // タスクを更新
-        $message->title = $request->title;
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
         

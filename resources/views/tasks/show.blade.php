@@ -13,8 +13,8 @@
         </tr>
         
         <tr>
-            <th>タイトル</th>
-            <td>{{ $message->title }}</td>
+            <th>ステータス</th>
+            <td>{{ $task->status }}</td>
         </tr>
         
         <tr>
