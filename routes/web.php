@@ -16,17 +16,18 @@ use App\Http\Controllers\TasksController;
 |
 */
 
-//Controller ( TasklistsController@index ) を経由してdashboardを表示する
-Route::get('/', [TasksController::class, 'index']);
-
-Route::get('/dashboard', [TasksController::class, 'index'])->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
-
-Route::resource('tasks', TasksController::class);
+//dashboardを表示する
+Route::get('/', function () {
+    return view('dashboard');
+});
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('users', UsersController::class, ['only' => ['index', 'show']]);
-    Route::resource('tasklists', TasklistsController::class, ['only' => ['store', 'destroy']]);
-    
+    Route::get('/dashboard', [TasksController::class, 'index']);
+    Route::resource('tasks', TasksController::class);
 });
+
+// Route::get('/dashboard', function () {
+//     return view('index');
+// })->middleware(['auth'])->name('index');
+
+require __DIR__.'/auth.php';

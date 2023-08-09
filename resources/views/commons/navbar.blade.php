@@ -12,7 +12,7 @@
                     @include('commons.link_items')
                 </ul>
                 <div class="dropdown dropdown-end">
-                    <button type="button" tabindex="0" class="btn btn-ghost normal-case font-normal lg:hidden">
+                    <button type="button" tabindex="0" class="btn btn-ghost normal-case font-normal">
                         @if (Auth::check())
                             {{ Auth::user()->name }}
                         @else
@@ -26,10 +26,6 @@
                         @include('commons.link_items')
                     </ul>
                 </div>
-                <ul tabindex="0" class="menu lg:block lg:menu-horizontal">
-                {{-- タスク作成ページへのリンク --}}
-                <li><a class="link link-hover" href="{{ route('tasks.create') }}">新規タスクの投稿</a></li>
-            </ul>
             </form>
         </div>
     </nav>

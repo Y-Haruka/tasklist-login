@@ -24,9 +24,9 @@ return new class extends Migration
         // });
         
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->string('content'); // contentカラム
-            $table->timestamps();
+            //$table->id();//識別するid←間違えて消えた
+            $table->string('content'); // contentカラム.タスク投稿内容
+            $table->timestamps(); //投稿日時と更新日時
         });
     }
 

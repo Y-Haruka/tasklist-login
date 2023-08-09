@@ -6,6 +6,8 @@
     <h2>タスク一覧</h2>
 </div>
 
+{{-- var_dump($tasks) --}}
+
     @if (isset($tasks))
         <table class="table table-zebra w-full my-4">
             <thead>
