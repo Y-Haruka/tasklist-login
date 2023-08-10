@@ -1,6 +1,6 @@
 @if (Auth::check())
     {{-- ユーザ一覧ページへのリンク --}}
-    <li><a class="link link-hover" href="{{ route('tasks.index') }}">UsersList</a></li>
+    <li><a class="link link-hover" href="{{ route('tasks.index') }}">タスク一覧</a></li>
     {{-- タスク作成ページへのリンク --}}
     <li><a class="link link-hover" href="{{ route('tasks.create') }}">新規タスクの投稿</a></li>
     <li class="divider lg:hidden"></li>
