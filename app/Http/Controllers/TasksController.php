@@ -16,22 +16,17 @@ class TasksController extends Controller
     // getでmessages/にアクセスされた場合の「一覧表示処理」
     public function index()
     {
-        $data = [];
-        if (\Auth::check()) { // 認証済みの場合
-            // 認証済みユーザを取得
-            $user = \Auth::user();
-            // タスク一覧を作成日時の降順で取得
-            //$tasks = Task::all();
-            $tasks = $user->tasks()->orderBy('user_id', 'desc')->paginate(10);
-            $data = [
-                'tasks' => $tasks,
-            ];
+        // 認証済みユーザを取得
+        $user = \Auth::user();
+        // タスク一覧を作成日時の降順で取得
+        //$tasks = Task::all();
+        $tasks = $user->tasks()->orderBy('user_id', 'desc')->paginate(10);
+        $data = [
+            'tasks' => $tasks,
+        ];
             
         //タスク一覧ビューでそれを表示
         return view('tasks.index', $data);
-        }
-        
-        return view('/dashboard');
     }
 
     /**
@@ -113,16 +108,17 @@ class TasksController extends Controller
           
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合はタスク投稿を更新
         if(\Auth::id() === $task->user_id){
+        
+            //idの値でタスクを検索して取得
+            $task = Task::findOrFail($id);
+            
+            //タスク編集ビューでそれを表示
+            return view('tasks.edit', [
+                'task' => $task,
+            ]);
         }
         
-        //idの値でタスクを検索して取得
-        $task = Task::findOrFail($id);
-        
-        //タスク編集ビューでそれを表示
-        return view('tasks.edit', [
-            'task' => $task,
-        ]);
-            
+        return view('/dashboard');
     }
 
     /**
@@ -145,15 +141,14 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
           
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合はタスク投稿を更新
-        if(\Auth::id() === $task->user_id){
-        }
-            //タスクを更新
-            $task->status = $request->status;
-            $task->content = $request->content;
-            $task->save();
+        \Auth::id() === $task->user_id;
+        //タスクを更新
+        $task->status = $request->status;
+        $task->content = $request->content;
+        $task->save();
 
-            // トップページへリダイレクトさせる
-            return redirect('/dashboard');
+        // トップページへリダイレクトさせる
+        return redirect('/dashboard');
     }
 
     /**
